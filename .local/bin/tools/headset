@@ -1,0 +1,73 @@
+#!/usr/bin/expect -f
+
+set prompt "#"
+log_user 1
+
+spawn pgrep bluetooth -c
+expect "0" {
+	spawn sudo -A systemctl start bluetooth
+	expect <<'END'
+
+	spawn mpc pause
+	expect $prompt
+
+	spawn killall pulseaudio
+	expect $prompt
+
+	spawn sleep 1
+	expect $prompt
+
+	spawn pulseaudio
+	expect "E:"
+}
+
+spawn bluetoothctl
+expect $prompt
+
+send -- "info\r"
+expect {
+	"Device FC:58:FA:A6:E7:94 (public)" {
+		send -- "disconnect\r"
+		expect "Successful disconnected"
+
+		send -- "power off\r"
+		expect "Changing power off succeeded"
+
+		send "quit\r"
+		expect eof
+
+		spawn notify-send "  Disconnected"
+		expect $prompt
+
+		spawn sudo systemctl stop bluetooth
+		expect eof
+	}
+	"Missing device address argument" {
+		send -- "power on\r"
+		expect "Changing power on succeeded"
+
+		send -- "connect FC:58:FA:A6:E7:94\r"
+		expect {
+			"Connection successful" {
+				send "quit\r"
+				expect $prompt
+
+				spawn notify-send " Connection Successful!"
+				expect eof
+			}
+			"Failed to connect" {
+				send -- "power off\r"
+				expect "Changing power off succeeded"
+
+				send "quit\r"
+				expect $prompt
+
+				spawn notify-send " Connection Failed!"
+				expect eof
+
+				spawn sudo systemctl stop bluetooth
+				expect eof
+			}
+		}
+	}
+}

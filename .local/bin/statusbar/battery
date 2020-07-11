@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+# Give a battery name (e.g. BAT0) as an argument.
+
+capacity=$(cat /sys/class/power_supply/BAT0/capacity) || exit
+status=$(cat /sys/class/power_supply/BAT0/status)
+
+if [ "$capacity" -ge 90 ]; then
+	icon="" #full
+	color="#10E42A" #green
+elif [ "$capacity" -ge 75 ]; then
+	icon="" #3Qs
+	color="#2360E9" #blue
+elif [ "$capacity" -ge 60 ]; then
+	icon="" #half
+	color="#5A29D9" #blue-purple
+elif [ "$capacity" -ge 30 ]; then
+	icon="" #1Q
+	color="#8E1BD7" #purple
+elif [ "$capacity" -ge 15 ]; then
+	icon="" #1Q
+	color="#E51090" #pink
+else
+	icon="" #empty
+	color="#FD121E" #red
+fi
+
+case $BLOCK_BUTTON in
+	1) notify-send $icon $capacity%;;
+esac
+
+[ "$status" = "Charging" ] || [ "$status" = "Unknown" ] && icon+=" | "
+
+printf "<span color='%s'>%s</span>\n" "$color" "$icon "

@@ -1,0 +1,43 @@
+!! Black
+*.color0:	#030006
+*.color8:	#20203F
+!! Red
+*.color1:	#CE223A
+*.color9:	#E40C3A
+!! Green
+*.color2:	#1AC070
+*.color10:	#00E67A
+!! Yellow
+*.color3:	#B5267E
+*.color11:	#E51090
+!! Blue
+*.color4:	#2962BC
+*.color12:	#206DEA
+!! Purple
+*.color5:	#9626B5
+*.color13:	#B50CE5
+!! Cyan
+*.color6:	#26AEB5
+*.color14:	#10D5DF
+!! White
+*.color7:	#C2C2C2
+*.color15:	#E9E9E9
+
+!! Background
+!! RED - dragon
+!!*.background:	#501030
+!!*.alpha:	0.60
+!! Blue
+*.background:	#102040
+*.alpha:	0.70
+!! PURPLE
+!!*.background:	#2B2050
+!!*.alpha:	0.60
+dropdown_tmuxdd.alpha:	0.80
+
+!! Nethack Terminal
+URxvt.scrollBar:	false
+URxvt.background:	#000000
+URxvt.foreground:	#ffffff	
+URxvt.font:		xft:Inconsolata-Regular 
+URxvt.meta8:		true

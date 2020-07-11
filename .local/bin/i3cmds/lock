@@ -1,0 +1,19 @@
+#!/bin/bash
+
+logo=~/Pictures/logo.png
+background=~/Pictures/screenshots/lock.png
+
+# Get the screenshot for the background
+scrot -z $background
+
+# Set brightness and contrast
+convert -brightness-contrast -30x-30 $background $background
+
+# Add blur and re-scale
+convert -filter Gaussian -resize 25% -resize 400% $background $background
+
+composite -gravity center $logo $background $background
+
+i3lock -i $background --insidevercolor=2862BC44  --insidewrongcolor=E40C3A44 --insidecolor=10102044  --ringvercolor=2862BC88  --ringwrongcolor=CE223A88 --ringcolor=10103088 --linecolor=10103088 --keyhlcolor=10D5DFBB --bshlcolor=E40C3ABB
+
+rm $background

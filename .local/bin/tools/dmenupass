@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+dmenu -fn Monospace-16 -sb "#E40C3A" -sf "#DDDDDD" -nf "#000000" -nb "#000000" -p "$1" <&- && echo

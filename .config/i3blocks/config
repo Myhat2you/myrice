@@ -1,0 +1,91 @@
+command=~/.local/bin/statusbar/$BLOCK_NAME
+separator_block_width=7
+markup=pango
+
+[music]
+interval=once
+signal=11
+
+[separator]
+interval=once
+command=echo "|"
+color=#808080
+
+[volume]
+interval=once
+signal=10
+
+[separator]
+interval=once
+command=echo "|"
+color=#808080
+
+#[pacpackages]
+#label=
+#interval=once
+#signal=8
+
+#[torrent]
+#interval=20
+#signal=7
+
+#[weather]
+#interval=18000
+#signal=5
+
+[clock]
+interval=30
+
+[separator]
+interval=once
+command=echo "|"
+color=#808080
+
+[disk]
+interval=60
+command=disk /home
+label=
+color=#2962BC
+#color=#206DEA
+
+[cpu]
+interval=15
+#label=
+color=#9626B5
+#color=#B50CE5
+
+[memory]
+interval=30
+label=
+color=#B5267E
+#color=#E51093
+
+[separator]
+interval=once
+command=echo "|"
+color=#808080
+
+[mailbox]
+label=
+interval=once
+signal=12
+color=#26AEB5
+#color=#10D5DF
+
+[internet]
+interval=10
+color=#1AC070
+#color=#00E67A
+
+[separator]
+interval=once
+command=echo ""
+
+#[separator]
+#interval=once
+#command=echo "|"
+#color=#808080
+
+#[battery]
+#command=battery BAT0
+#interval=5

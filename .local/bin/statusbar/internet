@@ -1,0 +1,15 @@
+#!/bin/sh
+
+IP="$(ip -o -4 address show | awk 'NR==2 { gsub(/\/.*/, "", $4); print $4 }')"
+
+icon="❎"
+if [ "$(cat /sys/class/net/w*/operstate)" = 'up' ] && [ "$(ping 1.1.1.1 -c 1)" ]; then icon=" "
+elif [ "$(cat /sys/class/net/e*/operstate)" = 'up' ] && [ "$(ping 1.1.1.1 -c 1)" ]; then icon="💻 "
+fi
+
+case $BLOCK_BUTTON in
+	1) notify-send $(grep "^\s*w" /proc/net/wireless | awk '{ print "📶", int($3 * 100 / 70) "%" }');;
+	3) IP="$(curl ifconfig.me)";;
+esac
+
+printf "$icon$IP\n"

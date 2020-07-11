@@ -1,0 +1,28 @@
+#!/bin/sh
+
+hm="$(date +%H%M)"
+
+if (($hm > $1))
+then
+	date="$(("$(date +%Y%m%d --date tomorrow)" * 1000000))"
+else
+	date="$(("$(date +%Y%m%d)" * 1000000))"
+fi
+
+time="$(("$date" + "$1" * 100))"
+
+sudo rtcwake -v -m mem --date $time
+
+sxiv ~/Pictures/wake.png &
+pid="$(echo $!)"
+sound="$(beeps-commy)"
+
+while kill -0 $pid > /dev/null 2>&1
+do
+	if [ kill -0 $sound > /dev/null 2>&1 ]
+	then
+		echo a
+	else
+		$sound = "$(beeps-commy & echo $!)"
+	fi
+done
